@@ -4,16 +4,27 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var apiRouter = require('./routes/api');
 
+var passport = require('passport');
 var passportSetup = require('./config/passport-setup');
+var connectDb = require('./models/index');
+var session = require('cookie-session');
+var cors = require('cors');
 
 var app = express();
+
+//use cors for api calls
+app.use(cors());
+
+//connect to mongoDB
+connectDb()
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -21,8 +32,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  name: 'session',
+  keys: [process.env.COOKIE_KEY]
+}));
+
+//passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
