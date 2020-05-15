@@ -5,6 +5,7 @@ var passport = require('passport');
 //logout user
 router.get('/auth/logout', function(req, res, next) {
   req.logout();
+  res.redirect('../../')
 });
 
 //strava auth page
@@ -14,7 +15,7 @@ router.get('/auth/strava', passport.authenticate('strava', {
 
 //callback for strava auth
 router.get('/auth/strava/callback', passport.authenticate('strava'), function(req, res, next) {
-  res.send(req.user);
+  res.redirect('../../../profile');
 });
 
 module.exports = router;
