@@ -11,15 +11,11 @@ var passport = require('passport');
 var passportSetup = require('./config/passport-setup');
 var connectDb = require('./models/index');
 var session = require('cookie-session');
-var cors = require('cors');
 
 var app = express();
 
-//use cors for api calls
-app.use(cors());
-
 //connect to mongoDB
-connectDb()
+connectDb();
 
 
 // view engine setup
@@ -35,7 +31,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({
   name: 'session',
-  keys: [process.env.COOKIE_KEY]
+  keys: [process.env.COOKIE_KEY],
+  maxAge: 24 * 60 * 60 * 1000 
 }));
 
 
@@ -45,6 +42,7 @@ app.use(passport.session());
 
 app.use('/users', usersRouter);
 app.use('/', indexRouter);
+app.use(express.static(__dirname + '/public'));
 
 
 // catch 404 and forward to error handler

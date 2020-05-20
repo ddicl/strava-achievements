@@ -1,0 +1,34 @@
+.grid-container {
+	display: grid;
+	grid-template-areas: 
+	'header header header header header header'
+	'left left center center right right';
+}
+
+.header {
+	grid-area: header;
+	height: 10vh;
+}
+
+.left {
+	grid-area: left;
+	width: 33vw;
+}
+
+.center {
+	text-align: center;
+	width: 33vw;
+	grid-area: center;
+	background-color: white;
+	border-radius: 10px;
+	height: 80vh;
+}
+
+.right {
+	grid-area: right;
+	width: 33vw;
+}
+
+img {
+	border-radius: 10px;
+}

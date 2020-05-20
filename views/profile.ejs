@@ -1,5 +1,38 @@
-<div>
-	<p>
-		<%= user.firstname %>
-	</p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Profile</title>
+
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/profile.css">
+</head>
+<body>
+	<nav>
+		<ul class="topnav">
+			<li id="title"><a href="#">STRAVA Achievements</a></li>
+			<li><a href="#">Profile</a></li>
+			<li><a href="/updatebestefforts">Update</a></li>
+			<li><a href="/bestefforts">Best Efforts</a></li>
+			<li><a href="/users/auth/logout">Logout</a></li>
+		</ul>
+	</nav>
+
+	<div class="grid-container">
+		<div class="header">
+			<!-- placeholder  -->
+		</div>
+		<div class="left">
+			<!-- placeholder  -->
+		</div>
+		<div class="center">
+			<h3><%= user.firstname %> <%= user.lastname %></h3>
+			<img src="<%= user.profile_picture %>" alt="">
+		</div>
+		<div class="right">
+			<!-- placeholder -->
+		</div>
+	</div>
+</body>
+</html>

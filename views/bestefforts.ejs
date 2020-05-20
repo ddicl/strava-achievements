@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Best Efforts</title>
+
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/bestefforts.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>	
+</head>
+<body>
+	<nav>
+		<ul class="topnav">
+			<li id="title"><a href="#">STRAVA Achievements</a></li>
+			<li><a href="/profile">Profile</a></li>
+			<li><a href="/updatebestefforts">Update</a></li>
+			<li><a href="/bestefforts">Best Efforts</a></li>
+			<li><a href="/users/auth/logout">Logout</a></li>
+		</ul>
+	</nav>
+
+	<div class="grid-container">
+		<div class="header">
+			<!-- placeholder  -->
+		</div>
+		<div class="left">
+			<!-- placeholder -->
+		</div>
+		<div class="center">
+			<table id="prTable" class="display">
+				<thead>
+					<tr>
+						<th>Run ID</th>
+						<th>PR count</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% for(var row = 0; row < rows.length; row++) { %>
+					<tr>
+						<td><%= rows[row].strava_id %></td>
+						<td><%= rows[row].pr_count %></td>
+					</tr>
+					<% } %>
+				</tbody>
+			</table>
+		</div>
+		<div class="right">
+			<!-- placeholder  -->
+		</div>
+	</div>
+	
+	<script>
+		$(document).ready( function () {
+    		$('#prTable').DataTable({
+				"scrollY": "50vh",
+  				"scrollCollapse": true,
+			});
+		} );
+	</script>
+</body>
+</html>

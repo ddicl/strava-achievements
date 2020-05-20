@@ -10,7 +10,7 @@ router.get('/auth/logout', function(req, res, next) {
 
 //strava auth page
 router.get('/auth/strava', passport.authenticate('strava', {
-  scope: ["activity:write,read"]
+  scope: ["activity:read_all"]
 }));
 
 //callback for strava auth
