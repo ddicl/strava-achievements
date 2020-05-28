@@ -13,7 +13,6 @@
 		<ul class="topnav">
 			<li id="title"><a href="#">STRAVA Achievements</a></li>
 			<li><a href="#">Profile</a></li>
-			<li><a href="/updatebestefforts">Update</a></li>
 			<li><a href="/bestefforts">Best Efforts</a></li>
 			<li><a href="/users/auth/logout">Logout</a></li>
 		</ul>
@@ -29,6 +28,9 @@
 		<div class="center">
 			<h3><%= user.firstname %> <%= user.lastname %></h3>
 			<img src="<%= user.profile_picture %>" alt="">
+			<br>
+			<button><a href="/getactivities">Update Activities</a></button>
+			<button><a href="/getbestefforts">Update Best Efforts</a></button>
 		</div>
 		<div class="right">
 			<!-- placeholder -->

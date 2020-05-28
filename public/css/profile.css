@@ -32,3 +32,42 @@
 img {
 	border-radius: 10px;
 }
+
+button {
+	margin-top: 20px;
+	padding: 10px;
+	border-radius: 10px;
+	background-color: rgba(211, 112, 0, 0.863);
+}
+
+button a {
+	color: black;
+	text-decoration: none;
+	font-size: 14px;
+}
+
+button:hover {
+	background-color: whitesmoke;
+}
+
+@media (max-width: 600px) {
+	.grid-container  {
+	  grid-template-areas: 
+		'header header header header header header' 
+		'left left left left left left' 
+		'center center center center center center' 
+		'right right right right right right' 
+		'footer footer footer footer footer footer';
+	}
+
+	.header {
+		height: 40vh;
+	}
+
+	.center {
+		overflow: hidden;
+		margin: 10vw;
+		width: 80vw;
+		height: 30vh;
+	}
+  }

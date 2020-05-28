@@ -16,7 +16,6 @@
 		<ul class="topnav">
 			<li id="title"><a href="#">STRAVA Achievements</a></li>
 			<li><a href="/profile">Profile</a></li>
-			<li><a href="/updatebestefforts">Update</a></li>
 			<li><a href="/bestefforts">Best Efforts</a></li>
 			<li><a href="/users/auth/logout">Logout</a></li>
 		</ul>
@@ -33,16 +32,27 @@
 			<table id="prTable" class="display">
 				<thead>
 					<tr>
-						<th>Run ID</th>
-						<th>PR count</th>
+						<th>Name</th>
+						<th>Distance (mi)</th>
+						<th>Time</th>
+						<th>Date</th>
 					</tr>
 				</thead>
 				<tbody>
 					<% for(var row = 0; row < rows.length; row++) { %>
-					<tr>
-						<td><%= rows[row].strava_id %></td>
-						<td><%= rows[row].pr_count %></td>
-					</tr>
+						<% var date = new Date(rows[row].start_date) %>
+						<% var totalS = rows[row].moving_time %>
+						<% var hours = Math.floor(totalS / 3600) %>
+						<% totalS %= 3600 %>
+						<% var minutes = Math.floor(totalS / 60) %>
+						<% var seconds = totalS % 60 %>
+						<% var pad = function(num){ return ('00' + num).slice(-2) } %>
+						<tr>
+							<td><%= rows[row].name %></td>
+							<td><%= Math.round((rows[row].distance / 1609) * 100) / 100 %></td>
+							<td><%= pad(hours) %>:<%= pad(minutes) %>:<%= pad(seconds) %></td>
+							<td><%= date.getMonth() + 1 %> / <%= date.getDate() %> / <%= date.getFullYear() %></td>
+						</tr>
 					<% } %>
 				</tbody>
 			</table>

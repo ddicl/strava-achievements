@@ -6,7 +6,8 @@ const prSchema = new mongoose.Schema({
 		unique: true
 	},
 	pr_count: Number,
-	user_id: Number
+	user_id: Number,
+	be_added: Boolean
 });
 
 const Pr = mongoose.model('Pr', prSchema);

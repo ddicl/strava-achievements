@@ -3,6 +3,7 @@ var router = express.Router();
 var passport = require('passport');
 var Pr = require('../models/pr');
 var User = require('../models/users');
+var BestEffort = require('..//models/besteffort');
 var request = require('request');
 require('dotenv').config();
 
@@ -84,7 +85,8 @@ const addToPrDb = function(pr_payload) {
 					new Pr({
 						strava_id: pr_payload[i].id,
 						pr_count: pr_payload[i].pr_count,
-						user_id: pr_payload[i].athlete.id
+						user_id: pr_payload[i].athlete.id,
+						be_added: false
 					}).save().then(function(pr) {
 						console.log('Added pr run: ' + pr);
 					});
@@ -103,13 +105,14 @@ router.get('/profile', pathCheck, function(req, res, next) {
 	res.render('profile', { user: req.user });
 });
 
-router.get('/updatebestefforts', checkToken, function(req, res, next) {
+router.get('/getactivities', checkToken, function(req, res, next) {
 	var opts = { 
 		'after': 0,
 		'per_page': 100
 	  };
 
 	strava.client(passport.session.accessToken);
+
 	strava.athlete.listActivities(opts, function(err, payload, limits) {
 		if(!err) {
 			let prObjects = prCheck(payload);
@@ -122,8 +125,59 @@ router.get('/updatebestefforts', checkToken, function(req, res, next) {
 	});
 });
 
-router.get('/bestefforts', function(req, res, next) {
+router.get('/getbestefforts', checkToken, function(req, res, next) {
+	strava.client(passport.session.accessToken);
+
 	Pr.find({ user_id: req.user.strava_id }, function(err, result) {
+		if(err) {
+			console.log(err);
+		} else {
+			if(!err) {
+				for (let row = 0; row < result.length; row++) {
+					if(result[row].be_added == true) {
+						console.log('Best efforts already added');
+					} else {
+						strava.activities.get({id: result[row].strava_id }, function(err, payload, limits) {
+							console.log(payload.best_efforts);
+							for (let bestEffort = 0; bestEffort < payload.best_efforts.length; bestEffort++) {
+								BestEffort.findOne({ strava_id: payload.best_efforts[bestEffort].id }).then(function(be) {
+									if(be) {
+										console.log('already in db');
+									} else {
+										new BestEffort({
+											strava_id: payload.best_efforts[bestEffort].id,
+											name: payload.best_efforts[bestEffort].name,
+											elapsed_time: payload.best_efforts[bestEffort].elapsed_time,
+											moving_time: payload.best_efforts[bestEffort].moving_time,
+											start_date: payload.best_efforts[bestEffort].start_date,
+											distance: payload.best_efforts[bestEffort].distance,
+											pr_rank: payload.best_efforts[bestEffort].pr_rank,
+											user_id: req.user.strava_id
+										}).save().then(function(be) {
+											console.log('Saved Best Effort: ' + be);
+											Pr.findByIdAndUpdate({ _id: result[row]._id },
+												{ be_added: true },
+												function(err, result) {
+													console.log('be added updated: ' + result);
+												}
+											);
+										});
+									}
+								});
+							}
+						});
+					}
+				}
+				res.render('update');
+			} else {
+				console.log(err);
+			}
+		}
+	});
+});
+
+router.get('/bestefforts', function(req, res, next) {
+	BestEffort.find({ user_id: req.user.strava_id }, function(err, result) {
 		if(err) {
 			console.log(err);
 		} else {

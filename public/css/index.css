@@ -17,11 +17,8 @@
 	grid-area: left;
 }
 
-.middle {
+.center {
 	grid-area: middle;
-}
-
-.middle {
 	text-align: center;
 }
 
@@ -35,8 +32,12 @@
 	  grid-template-areas: 
 		'header header header header header header' 
 		'left left left left left left' 
-		'middle middle middle middle middle middle' 
+		'center center center center center center' 
 		'right right right right right right' 
 		'footer footer footer footer footer footer';
+	}
+
+	.header {
+		height: 40vh;
 	}
   }

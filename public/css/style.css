@@ -41,6 +41,6 @@ nav ul {
   }
 
   @media screen and (max-width: 600px) {
-	  ul.topnav li#title,
+	ul.topnav li#title,
 	ul.topnav li {float: none;}
   }
