@@ -39,4 +39,12 @@
 		'right right right right right right' 
 		'footer footer footer footer footer footer';
 	}
+
+	.header {
+		height: 40vh;
+	}
+
+	.middle {
+		width: 96vw;
+	}
   }

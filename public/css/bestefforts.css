@@ -12,22 +12,22 @@
 
 .left {
 	grid-area: left;
-	width: 20vw;
+	width: 10vw;
 }
 
 .center {
 	text-align: center;
-	width: 50vw;
 	grid-area: center;
 	background-color: white;
 	border-radius: 10px;
 	height: 60vh;
 	padding: 10vh;
+	overflow: scroll;
 }
 
 .right {
 	grid-area: right;
-	width: 20vw;
+	width: 10vw;
 }
 
 @media (max-width: 600px) {
@@ -41,12 +41,12 @@
 	}
 
 	.header {
-		height: 40vh;
+		height: 30vh;
 	}
 
 	.center {
 		overflow: scroll;
-		width: 60vw;
-		height: 30vh;
+		padding: 10px;
+		height: 60vh;
 	}
   }

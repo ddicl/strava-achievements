@@ -7,6 +7,10 @@ body {
 	color: rgba(211, 112, 0, 0.863);
 }
 
+nav {
+	margin-bottom: 50px;
+}
+
 nav ul {
 	list-style-type: none;
 	margin: 0;
@@ -14,7 +18,7 @@ nav ul {
 	overflow: hidden;
 	background-color: white;
 	position: fixed;
-	width: 100%;
+	width: 100vw;
 	top: 0;
 	left: 0;
   }

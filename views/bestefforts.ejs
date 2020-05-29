@@ -51,7 +51,7 @@
 							<td><%= rows[row].name %></td>
 							<td><%= Math.round((rows[row].distance / 1609) * 100) / 100 %></td>
 							<td><%= pad(hours) %>:<%= pad(minutes) %>:<%= pad(seconds) %></td>
-							<td><%= date.getMonth() + 1 %> / <%= date.getDate() %> / <%= date.getFullYear() %></td>
+							<td><%= date.getMonth() + 1 %>/<%= date.getDate() %>/<%= date.getFullYear() %></td>
 						</tr>
 					<% } %>
 				</tbody>

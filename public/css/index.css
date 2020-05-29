@@ -2,7 +2,7 @@
 	display: grid;
 	grid-template-areas: 
 	  'header header header header header header' 
-	  'left left middle middle right right' 
+	  'left left center center right right' 
 	  'footer footer footer footer footer footer';
 	/* grid-column-gap: 10px; - if you want gap between the columns */
   } 
@@ -18,14 +18,15 @@
 }
 
 .center {
-	grid-area: middle;
+	grid-area: center;
 	text-align: center;
+	width: 33vw;
 }
 
 .instructions li {
 	text-align: left;
-	margin-left: 60px;
-	margin-right: 60px;
+	/* margin-left: 60px;
+	margin-right: 60px; */
 }
 
 .right {
@@ -44,6 +45,11 @@
 	}
 
 	.header {
-		height: 40vh;
+		height: 20vh;
+	}
+
+	.center {
+		margin-left: 5vw;
+		width: 86vw;
 	}
   }

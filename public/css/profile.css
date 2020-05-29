@@ -61,13 +61,13 @@ button:hover {
 	}
 
 	.header {
-		height: 40vh;
+		height: 25vh;
 	}
 
 	.center {
+		background-color: whitesmoke;
 		overflow: hidden;
-		margin: 10vw;
-		width: 80vw;
-		height: 30vh;
+		height: 60vh;
+		width: auto;
 	}
   }
