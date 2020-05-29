@@ -108,7 +108,7 @@ router.get('/profile', pathCheck, function(req, res, next) {
 	res.render('profile', { user: req.user });
 });
 
-router.get('/getactivities', checkToken, function(req, res, next) {
+router.get('/getactivities', pathCheck, checkToken, function(req, res, next) {
 	var opts = { 
 		'after': 0,
 		'per_page': 100
@@ -128,7 +128,7 @@ router.get('/getactivities', checkToken, function(req, res, next) {
 	});
 });
 
-router.get('/getbestefforts', checkToken, function(req, res, next) {
+router.get('/getbestefforts', pathCheck, checkToken, function(req, res, next) {
 	strava.client(passport.session.accessToken);
 
 	Pr.find({ user_id: req.user.strava_id }, function(err, result) {
@@ -179,7 +179,7 @@ router.get('/getbestefforts', checkToken, function(req, res, next) {
 	});
 });
 
-router.get('/bestefforts', function(req, res, next) {
+router.get('/bestefforts', pathCheck, function(req, res, next) {
 	BestEffort.find({ user_id: req.user.strava_id }, function(err, result) {
 		if(err) {
 			console.log(err);
