@@ -5,14 +5,17 @@ var Pr = require('../models/pr');
 var User = require('../models/users');
 var BestEffort = require('..//models/besteffort');
 var request = require('request');
-require('dotenv').config();
+
+if (process.env.NODE_ENV !== 'production') {
+	require('dotenv').config();
+}
 
 var strava = require('strava-v3')
 strava.config({
   "access_token"  : passport.session.accessToken,
   "client_id"     : process.env.CLIENT_ID,
   "client_secret" : process.env.CLIENT_SECRET,
-  "redirect_uri"  : "http://localhost:3000/users/auth/strava/callback"
+  "redirect_uri"  : process.env.DOMAIN_URL + "/users/auth/strava/callback"
 });
 
 const pathCheck = function(req, res, next) {

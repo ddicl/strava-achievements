@@ -1,7 +1,10 @@
 var passport = require('passport');
 var StravaStrategy = require('passport-strava-oauth2').Strategy;
 var User = require('../models/users');
-require('dotenv').config();
+
+if (process.env.NODE_ENV !== 'production') {
+	require('dotenv').config();
+}
 
 passport.serializeUser(function(user, done) {
 	done(null, user.id);
@@ -14,9 +17,9 @@ passport.deserializeUser(function(id, done) {
 });
 
 passport.use(new StravaStrategy({
-	clientID: process.env.CLIENT_ID + '&response_type=code&redirect_uri=http://localhost&approval_prompt=force',
+	clientID: process.env.CLIENT_ID + '&response_type=code&redirect_uri=' + process.env.DOMAIN_URL + '&approval_prompt=force',
 	clientSecret: process.env.CLIENT_SECRET,//fill
-	callbackURL: "http://localhost:3000/users/auth/strava/callback"
+	callbackURL: process.env.DOMAIN_URL + "/users/auth/strava/callback"
 },
 function(accessToken, refreshToken, profile, done) {
 	var expiresAt = new Date().getTime() / 1000 + 21600;
