@@ -22,6 +22,12 @@
 	text-align: center;
 }
 
+li {
+	text-align: left;
+	margin-left: 60px;
+	margin-right: 60px;
+}
+
 .right {
 	width: 33vw;
 	grid-area: right;
